@@ -17,15 +17,16 @@ class Mural
         $this->config = config('mural');
     }
 
-    public function render($content, $room = null)
+    public function render($content, $room = null, $options = [])
     {
+        $options = collect($options);
         $content = $this->getContentObject($content);
         $comments = $this->getComments($content, $room);
         $totalComment = $content->comments()->count();
 
         event('mural.render', [$content]);
 
-        return view("mural::index", compact('content', 'comments', 'room', 'totalComment'))->render();
+        return view("mural::index", compact('content', 'comments', 'room', 'totalComment', 'options'))->render();
     }
 
     public function addComment($content, $body, $room = null)

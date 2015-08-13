@@ -1,7 +1,9 @@
 <div class="ui segment mural-container">
     <div class="column" id="form_comment">
         <h3 class="ui header">@lang('mural.title_with_count', ['count' => $totalComment])</h3>
+        @if(!$options->get('readonly'))
         @include('mural::form')
+        @endif
     </div>
 
     <div class="ui comments mural-list">
