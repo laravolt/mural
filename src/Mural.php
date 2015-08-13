@@ -20,9 +20,32 @@ class Mural
     public function render($content, $room = null)
     {
         $content = $this->getContentObject($content);
-        $comments = $content->comments()->latest()->room($room)->paginate($this->config['per_page']);
+        $comments = $this->getComments($content, $room);
 
         return view("mural::index", compact('content', 'comments', 'room'))->render();
+    }
+
+    public function addComment($content, $body, $room = null)
+    {
+        $comment = new Comment();
+        $comment->body = $body;
+        $comment->room = $room;
+        $comment->author()->associate(auth()->user());
+        $content->comments()->save($comment);
+
+        return $comment;
+    }
+
+    public function getComments($content, $room = null, $options = [])
+    {
+        $options = collect($options);
+        $comments = $content->comments()->newest()->room($room);
+
+        if($options->has('beforeId')) {
+            $comments->beforeId($options->get('beforeId'));
+        }
+
+        return $comments->paginate($this->config['per_page']);
     }
 
     protected function getContentObject($content)

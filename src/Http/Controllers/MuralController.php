@@ -5,7 +5,7 @@ namespace Laravolt\Mural\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Laravolt\Mural\Comment;
+use Mural;
 
 class MuralController extends Controller
 {
@@ -20,7 +20,7 @@ class MuralController extends Controller
     public function fetch(Request $request)
     {
         $content = Post::findOrFail($request->get('commentable_id'));
-        $comments = $content->comments()->latest($request->get('last_id'))->room($request->get('room'))->paginate(config('mural.per_page'));
+        $comments = Mural::getComments($content, $request->get('room'), ['beforeId' => $request->get('last_id')]);
 
         return view('mural::list', compact('comments', 'content'));
     }
@@ -28,10 +28,7 @@ class MuralController extends Controller
     public function store(Request $request)
     {
         $content = Post::findOrFail($request->get('commentable_id'));
-
-        $comment = Comment::create(['body' => $request->get('body'), 'room' => $request->get('room')]);
-        $comment->author()->associate(auth()->user());
-        $content->comments()->save($comment);
+        $comment = Mural::addComment($content, $request->get('body'), $request->get('room'));
 
         return view('mural::item', compact('comment'));
     }

@@ -6,22 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
 
-    protected $fillable = ['body', 'room'];
-
     public function author()
     {
         return $this->belongsTo(config('auth.model'));
     }
 
-    public function scopeLatest($query, $beforeId = null)
+    public function scopeNewest($query)
     {
-        $query->orderBy('id', 'desc');
+        return $query->orderBy('id', 'desc');
+    }
 
-        if($beforeId) {
-            $query->where('id', '<', $beforeId);
-        }
-
-        return $query;
+    public function scopeBeforeId($query, $beforeId)
+    {
+        return $query->where('id', '<', $beforeId);
     }
 
     public function scopeRoom($query, $room)
