@@ -10,7 +10,7 @@
         <div class="field">
             <textarea name="body" placeholder="@lang('mural.write_a_comment')"></textarea>
         </div>
-        <button type="submit" class="ui fluid large teal submit button">@lang('comment.submit')</button>
+        <button type="submit" class="ui fluid large teal submit button">@lang('mural.submit')</button>
     </form>
 @else
     <div class="ui message warning">

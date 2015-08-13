@@ -1,6 +1,6 @@
 <div class="ui segment mural-container">
     <div class="column" id="form_comment">
-        <h3 class="ui header">@lang('mural.title_with_count', ['count' => $content['comment_count']])</h3>
+        <h3 class="ui header">@lang('mural.title_with_count', ['count' => $totalComment])</h3>
         @include('mural::form')
     </div>
 

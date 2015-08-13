@@ -21,8 +21,9 @@ class Mural
     {
         $content = $this->getContentObject($content);
         $comments = $this->getComments($content, $room);
+        $totalComment = $content->comments()->count();
 
-        return view("mural::index", compact('content', 'comments', 'room'))->render();
+        return view("mural::index", compact('content', 'comments', 'room', 'totalComment'))->render();
     }
 
     public function addComment($content, $body, $room = null)
