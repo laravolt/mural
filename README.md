@@ -83,6 +83,9 @@ Anda juga bisa mengelompokkan komentar berdasar `room` tertentu, sehingga untuk 
     {!! Mural::render($post, 'collaborator') !!}
     {!! Mural::render($post, 'you-can-put-anything-here') !!}    
 
+	// readonly, user tidak bisa submit komentar
+	{!! Mural::render($post, 'room', ['readonly' => true]) !!}        
+
 Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://semantic-ui.com/). Bootstrap segera menyusul (yang berminat bisa kirim Pull Request).
 
 #### Menambah Komentar
