@@ -67,6 +67,8 @@ Post::find(1)->comments()->orderBy('created_at', 'desc');
 
 ### Shortcut
 
+#### Menampilkan Widget Komentar
+
 Untuk menampilkan widget komentar, seperti yang biasa ditemui di kebanyakan blog, tambahkan kode berikut di view Anda:
 
 	$post = App\Models\Post::find(1);
@@ -82,6 +84,14 @@ Anda juga bisa mengelompokkan komentar berdasar `room` tertentu, sehingga untuk 
     {!! Mural::render($post, 'you-can-put-anything-here') !!}    
 
 Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://semantic-ui.com/). Bootstrap segera menyusul (yang berminat bisa kirim Pull Request).
+
+#### Menambah Komentar
+
+	Mural::addComment($post, 'komentar');  // room = null
+	Mural::addComment($post, 'komentar lagi', 'collaborator'); // room = collaborator
+
+#### Mendapatkan Komentar
+	Mural::getComments($post, 'room', []);
 
 ## Event
 
