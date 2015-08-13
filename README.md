@@ -91,10 +91,11 @@ Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://
 * Multi room (done)
 * Skin: semantic-ui (done)
 * Skin: bootstrap
+* Validasi konten
 * Translasi
 * Permalink untuk komentar tertentu
 * Realtime update jika ada komentar baru
-* Trigger event agar aplikasi utama bisa melakukan aksi tambahan terkait komentar
+* Event (done)
 * Edit komentar
 * Hapus komentar
 * Laporkan sebagai spam

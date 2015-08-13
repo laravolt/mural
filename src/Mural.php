@@ -23,18 +23,26 @@ class Mural
         $comments = $this->getComments($content, $room);
         $totalComment = $content->comments()->count();
 
+        event('mural.render', [$content]);
+
         return view("mural::index", compact('content', 'comments', 'room', 'totalComment'))->render();
     }
 
     public function addComment($content, $body, $room = null)
     {
+        $author = auth()->user();
+
         $comment = new Comment();
         $comment->body = $body;
         $comment->room = $room;
-        $comment->author()->associate(auth()->user());
-        $content->comments()->save($comment);
+        $comment->author()->associate($author);
 
-        return $comment;
+        if($content->comments()->save($comment)) {
+            event('mural.comment.add', [$comment, $author]);
+            return $comment;
+        }
+
+        return false;
     }
 
     public function getComments($content, $room = null, $options = [])
