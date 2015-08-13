@@ -32,7 +32,7 @@ class Mural
     public function addComment($content, $body, $room = null)
     {
         $author = auth()->user();
-
+        $content = $this->getContentObject($content);
         $comment = new Comment();
         $comment->body = $body;
         $comment->room = $room;
@@ -49,6 +49,7 @@ class Mural
     public function getComments($content, $room = null, $options = [])
     {
         $options = collect($options);
+        $content = $this->getContentObject($content);
         $comments = $content->comments()->newest()->room($room);
 
         if($options->has('beforeId')) {
