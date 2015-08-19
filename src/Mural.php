@@ -39,7 +39,7 @@ class Mural
         $comment->author()->associate($author);
 
         if($content->comments()->save($comment)) {
-            event('mural.comment.add', [$comment, $author]);
+            event('mural.comment.add', [$comment, $content, $author]);
             return $comment;
         }
 

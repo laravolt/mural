@@ -101,7 +101,7 @@ Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://
 | Nama event         | Kapan dipanggil                         | Parameter
 | -------------      | -------------                           | ---
 | mural.render       | Ketika widget mural ditampilkan di view | $content
-| mural.comment.add  | Ketika ada komentar baru                | $comment, $user
+| mural.comment.add  | Ketika ada komentar baru                | $comment, $content, $user
 
 ## Requirement
 * jquery
