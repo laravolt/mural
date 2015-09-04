@@ -72,7 +72,7 @@ Post::find(1)->comments()->orderBy('created_at', 'desc');
 Untuk menampilkan widget komentar, seperti yang biasa ditemui di kebanyakan blog, tambahkan kode berikut di view Anda:
 
 	$post = App\Models\Post::find(1);
-    {!! Mural::render($post) !!}
+    {!! Mural::render($post, 'sample-room') !!}
     
 Selesai, `laravolt/mural` sudah dilengkapi dengan `Model`, `Controller`, dan `View` yang siap pakai, hasilnya seperti dibawah ini:
 
@@ -90,7 +90,6 @@ Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://
 
 #### Menambah Komentar
 
-	Mural::addComment($post, 'komentar');  // room = null
 	Mural::addComment($post, 'komentar lagi', 'collaborator'); // room = collaborator
 
 #### Mendapatkan Komentar
@@ -101,7 +100,7 @@ Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://
 | Nama event         | Kapan dipanggil                         | Parameter
 | -------------      | -------------                           | ---
 | mural.render       | Ketika widget mural ditampilkan di view | $content
-| mural.comment.add  | Ketika ada komentar baru                | $comment, $content, $user
+| mural.comment.add  | Ketika ada komentar baru                | $comment, $content, $user, $room
 
 ## Requirement
 * jquery

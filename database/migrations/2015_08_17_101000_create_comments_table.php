@@ -13,7 +13,7 @@ class CreateCommentsTable extends Migration
             $table->integer('author_id')->unsigned();
             $table->morphs('commentable');
             $table->text('body');
-            $table->string('room')->nullable();
+            $table->string('room');
             $table->softDeletes();
             $table->timestamps();
 

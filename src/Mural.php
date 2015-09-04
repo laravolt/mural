@@ -17,7 +17,7 @@ class Mural
         $this->config = config('mural');
     }
 
-    public function render($content, $room = null, $options = [])
+    public function render($content, $room, $options = [])
     {
         $options = collect($options);
         $content = $this->getContentObject($content);
@@ -29,7 +29,7 @@ class Mural
         return view("mural::index", compact('content', 'comments', 'room', 'totalComment', 'options'))->render();
     }
 
-    public function addComment($content, $body, $room = null)
+    public function addComment($content, $body, $room)
     {
         $author = auth()->user();
         $content = $this->getContentObject($content);
@@ -39,14 +39,14 @@ class Mural
         $comment->author()->associate($author);
 
         if($content->comments()->save($comment)) {
-            event('mural.comment.add', [$comment, $content, $author]);
+            event('mural.comment.add', [$comment, $content, $author, $room]);
             return $comment;
         }
 
         return false;
     }
 
-    public function getComments($content, $room = null, $options = [])
+    public function getComments($content, $room, $options = [])
     {
         $options = collect($options);
         $content = $this->getContentObject($content);
