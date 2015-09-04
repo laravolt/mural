@@ -22,7 +22,7 @@ class Mural
         $options = collect($options);
         $content = $this->getContentObject($content);
         $comments = $this->getComments($content, $room);
-        $totalComment = $content->comments()->count();
+        $totalComment = $content->comments()->room($room)->count();
 
         event('mural.render', [$content]);
 
