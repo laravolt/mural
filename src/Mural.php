@@ -2,6 +2,7 @@
 namespace Laravolt\Mural;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravolt\Mural\Contracts\Commentable;
 
 class Mural
 {
@@ -59,13 +60,30 @@ class Mural
         return $comments->paginate($this->config['per_page']);
     }
 
+    public function remove($id)
+    {
+        $comment = Comment::find($id);
+        $user = auth()->user();
+
+        if($comment && $user->canModerateComment()) {
+            $deleted = $comment->delete();
+
+            if ($deleted) {
+                event('mural.comment.remove', [$comment, $user]);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     protected function getContentObject($content)
     {
-        if (!$content instanceof Model) {
+        if (!$content instanceof Commentable) {
             $class = $this->config['default_commentable'];
 
             if(!$class) {
-                throw new \InvalidArgumentException('Parameter only accept valid Commentable object if config votee.content_model not set');
+                throw new \InvalidArgumentException('Value set in config mural.default_commentable was not instance of ' . Commentable::class);
             }
 
             return with(new $class)->findOrFail($content);

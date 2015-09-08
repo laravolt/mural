@@ -16,6 +16,8 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadViewsFrom(realpath(__DIR__.'/../resources/views/' . config('mural.skin')), 'mural');
 
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'mural');
+
         $this->setupRoutes($this->app->router);
 
         $this->publishes([

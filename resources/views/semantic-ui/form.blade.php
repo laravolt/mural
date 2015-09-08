@@ -8,12 +8,12 @@
         @endif
 
         <div class="field">
-            <textarea name="body" placeholder="@lang('mural.write_a_comment')"></textarea>
+            <textarea name="body" placeholder="@lang('mural::mural.write_a_comment')" rows="5"></textarea>
         </div>
-        <button type="submit" class="ui fluid large teal submit button">@lang('mural.submit')</button>
+        <button type="submit" class="ui fluid submit button">@lang('mural::mural.submit')</button>
     </form>
 @else
     <div class="ui message warning">
-        @lang('mural.must_login', ['link' => url('/auth/login')])
+        @lang('mural::mural.must_login', ['link' => url('/auth/login')])
     </div>
 @endif
