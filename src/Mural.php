@@ -70,7 +70,7 @@ class Mural
 
             if ($deleted) {
                 event('mural.comment.remove', [$comment, $user]);
-                return true;
+                return $comment;
             }
         }
 

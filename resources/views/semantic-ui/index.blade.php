@@ -1,6 +1,6 @@
 <div class="ui segment mural-container">
     <div class="column" id="form_comment">
-        <h3 class="ui header">@lang('mural::mural.title_with_count', ['count' => $totalComment])</h3>
+        <h3 class="ui header title">@lang('mural::mural.title_with_count', ['count' => $totalComment])</h3>
         @if(!$options->get('readonly'))
         @include('mural::form')
         @endif
@@ -41,6 +41,7 @@
                 dataType: 'json',
                 success: function(response){
                     commentContainer.prepend(response.html);
+                    mural.find('.title').html(response.title);
                     form.find("input[type=text], textarea").val('');
                     mural.find('.button-empty').remove();
                 },
@@ -109,6 +110,7 @@
                 success: function (response) {
                     if(response.status == 1) {
                         $('#mural-comment-' + response.id).hide();
+                        mural.find('.title').html(response.title);
                     }
                 },
                 error: function (response) {

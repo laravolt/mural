@@ -20,7 +20,8 @@ class MuralController extends Controller
 
     public function fetch(Request $request)
     {
-        $comments = Mural::getComments($request->get('commentable_id'), $request->get('room'), ['beforeId' => $request->get('last_id')]);
+        $comments = Mural::getComments($request->get('commentable_id'), $request->get('room'),
+            ['beforeId' => $request->get('last_id')]);
 
         return view('mural::list', compact('comments', 'content'));
     }
@@ -30,12 +31,15 @@ class MuralController extends Controller
         $json = ['status' => 0];
         $code = 500;
 
+        $room = $request->get('room');
+
         try {
-            $comment = Mural::addComment($request->get('commentable_id'), $request->get('body'), $request->get('room'));
+            $comment = Mural::addComment($request->get('commentable_id'), $request->get('body'), $room);
             $json['status'] = 1;
             $json['html'] = view('mural::item', compact('comment'))->render();
+            $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->room($room)->count()]);
             $code = 200;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $json['error'] = $e->getMessage();
         }
 
@@ -46,9 +50,10 @@ class MuralController extends Controller
     {
         $json['status'] = 0;
 
-        if(Mural::remove($id)) {
+        if ($comment = Mural::remove($id)) {
             $json['status'] = 1;
             $json['id'] = $id;
+            $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->room($comment['room'])->count()]);
         }
 
         return response()->json($json);
