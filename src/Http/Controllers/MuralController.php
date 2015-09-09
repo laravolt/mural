@@ -37,7 +37,7 @@ class MuralController extends Controller
             $comment = Mural::addComment($request->get('commentable_id'), $request->get('body'), $room);
             $json['status'] = 1;
             $json['html'] = view('mural::item', compact('comment'))->render();
-            $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->room($room)->count()]);
+            $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->siblingsAndSelf()->count()]);
             $code = 200;
         } catch (\Exception $e) {
             $json['error'] = $e->getMessage();
@@ -53,7 +53,7 @@ class MuralController extends Controller
         if ($comment = Mural::remove($id)) {
             $json['status'] = 1;
             $json['id'] = $id;
-            $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->room($comment['room'])->count()]);
+            $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->siblingsAndSelf()->count()]);
         }
 
         return response()->json($json);

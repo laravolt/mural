@@ -39,4 +39,9 @@ class Comment extends Model
 
         return $query;
     }
+
+    public function scopeSiblingsAndSelf($query)
+    {
+        return $query->room($this->room)->where('commentable_id', $this->commentable_id)->where('commentable_type', $this->commentable_type);
+    }
 }
