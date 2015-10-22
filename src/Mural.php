@@ -1,7 +1,6 @@
 <?php
 namespace Laravolt\Mural;
 
-use Illuminate\Database\Eloquent\Model;
 use Laravolt\Mural\Contracts\Commentable;
 
 class Mural
