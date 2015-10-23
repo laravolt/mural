@@ -1,8 +1,12 @@
 <?php
 
 return [
+    // semantic-ui or bootstrap
     'skin'                => 'semantic-ui',
-    'default_commentable' => \App\Models\Post::class,
+
+    // comment per page
     'per_page'            => 5,
+
+    // whether user enable to vote comment or not
     'vote'                => false,
 ];

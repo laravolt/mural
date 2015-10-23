@@ -16,7 +16,7 @@ Atau menambahkan deklarasi berikut ke file composer.json:
 
     "require": {
         ...
-        "laravolt/mural": "^1.0@dev"
+        "laravolt/mural": "^0.2"
     },
 	
 ### Service Provider
@@ -102,9 +102,29 @@ Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://
 | mural.render       | Ketika widget mural ditampilkan di view | $content
 | mural.comment.add  | Ketika ada komentar baru                | $comment, $content, $user, $room
 
+## Configuration
+
+``` php
+<?php
+
+return [
+    // semantic-ui or bootstrap
+    'skin'                => 'semantic-ui',
+
+    // comment per page
+    'per_page'            => 5,
+
+    // whether user enable to vote comment or not
+    'vote'                => false,
+    
+    // default commentable class (deprecated)
+    'default_commentable' => \App\Models\Post::class,    
+];
+```
+
 ## Requirement
 * jquery
-* semantic-ui
+* semantic-ui or bootstrap
 
 ## Roadmap
 * Basic comment stream (done)
@@ -117,5 +137,6 @@ Untuk masalah tampilan, saat ini skin yang didukung adalah [semantic-ui](http://
 * Realtime update jika ada komentar baru
 * Event (done)
 * Edit komentar
-* Hapus komentar
+* Hapus komentar (done)
 * Laporkan sebagai spam
+* Vote (like dislike) komentar (done)
