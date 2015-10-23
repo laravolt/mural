@@ -5,6 +5,11 @@ trait CommentableTrait
 {
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->has('author');
+        $class = Comment::class;
+        if (config('mural.vote')) {
+           $class = CommentWithVote::class;
+        }
+
+        return $this->morphMany($class, 'commentable')->has('author');
     }
 }

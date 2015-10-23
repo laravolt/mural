@@ -33,7 +33,7 @@ class Mural
     {
         $author = auth()->user();
         $content = $this->getContentObject($content);
-        $comment = new Comment();
+        $comment = $content->comments()->getRelated();
         $comment->body = $body;
         $comment->room = $room;
         $comment->author()->associate($author);

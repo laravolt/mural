@@ -24,6 +24,12 @@
         </div>
     </div>
 
+    @if(config('mural.vote'))
+    <div class="extra content">
+        {!! \Laravolt\Votee\VoteeFacade::render($comment, ['class' => 'mini basic']) !!}
+    </div>
+    @endif
+
     <div class="ui inverted dimmer">
         <div class="ui mini text loader">@lang('mural::mural.loading')</div>
     </div>

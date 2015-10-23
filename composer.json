@@ -25,6 +25,9 @@
         "phpunit/phpunit" : "4.*",
         "scrutinizer/ocular": "~1.1"
     },
+    "suggest": {
+        "laravolt/votee": "Required to enable comment vote",
+    },
     "autoload": {
         "psr-4": {
             "Laravolt\\Mural\\": "src"
