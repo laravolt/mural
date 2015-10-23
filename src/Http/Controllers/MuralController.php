@@ -4,6 +4,7 @@ namespace Laravolt\Mural\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Laravolt\Mural\Factory;
 use Laravolt\Mural\Http\Requests\Delete;
 use Laravolt\Mural\Http\Requests\Store;
 use Mural;
@@ -34,7 +35,7 @@ class MuralController extends Controller
         $room = $request->get('room');
 
         try {
-            $comment = Mural::addComment($request->get('commentable_id'), $request->get('body'), $room);
+            $comment = Mural::addComment(Factory::create($request->get('commentable_id'), $request->get('commentable_type')), $request->get('body'), $room);
             $json['status'] = 1;
             $json['html'] = view('mural::item', compact('comment'))->render();
             $json['title'] = trans('mural::mural.title_with_count', ['count' => $comment->siblingsAndSelf()->has('author')->count()]);
