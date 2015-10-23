@@ -26,7 +26,7 @@
 
     @if(config('mural.vote'))
     <div class="extra content">
-        {!! \Laravolt\Votee\VoteeFacade::render($comment, ['class' => 'mini basic']) !!}
+        {!! \Laravolt\Votee\VoteeFacade::render($comment, ['class' => 'basic', 'size' => 'mini']) !!}
     </div>
     @endif
 
