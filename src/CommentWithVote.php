@@ -9,4 +9,5 @@ class CommentWithVote extends Comment
 
     protected $table = 'comments';
 
+    protected $with = ['voteCounter'];
 }
