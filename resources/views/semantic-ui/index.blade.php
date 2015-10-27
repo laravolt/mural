@@ -1,16 +1,33 @@
-<div class="ui segment mural-container">
-    <div class="column" id="form_comment">
+<div class="ui segment mural-container"
+     data-id="{{ $content->getKey() }}"
+     data-type="{{ get_class($content) }}"
+     data-room="{{ $room }}"
+     data-sort="latest"
+     data-page="1"
+     data-url="{{ route('mural.index') }}"
+>
+    <div id="form_comment">
         <h3 class="ui header title">@lang('mural::mural.title_with_count', ['count' => $totalComment])</h3>
         @if(!$options->get('readonly'))
-        @include('mural::form')
+            @include('mural::form')
         @endif
     </div>
 
-    <div class="ui comments minimal mural-list">
-        @include('mural::list', ['comments' => $comments, 'options' => $options])
+    @if(config('mural.vote'))
+        @include(('mural::sort'))
+    @endif
+
+    <div class="ui minimal comments">
+        <div class="mural-list">
+            @include('mural::list', ['comments' => $comments, 'options' => $options])
+        </div>
+        <div class="ui inverted dimmer">
+            <div class="ui mini text loader">@lang('mural::mural.loading')</div>
+        </div>
     </div>
+
     @if(!$comments->isEmpty())
-    <a href="#" data-url="{{ route('mural.fetch', ['commentable_id' => $content->getKey(), 'room' => $room]) }}" class="ui fluid basic submit button mural-more" data-no-more-content="@lang('mural::mural.no_more_content')">@lang('mural::mural.load_more')</a>
+        <button class="ui fluid basic submit button mural-more" data-no-more-content="@lang('mural::mural.no_more_content')">@lang('mural::mural.load_more')</button>
     @else
         <button class="button ui basic fluid disabled button-empty">@lang('mural::mural.empty')</button>
     @endif

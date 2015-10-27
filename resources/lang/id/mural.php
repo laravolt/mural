@@ -9,5 +9,9 @@ return [
     'no_more_content'  => 'Tidak ada lagi komentar',
     'empty'            => 'Belum ada komentar',
     'remove'           => 'Hapus',
-    'loading'          => 'Loading'
+    'loading'          => 'Loading',
+    'sort'             => [
+        'latest' => 'Terbaru',
+        'liked'  => 'Paling Disukai',
+    ],
 ];

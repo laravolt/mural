@@ -1,4 +1,3 @@
 <?php
 
-$router->resource('mural', 'MuralController', ['only' => ['store', 'destroy']]);
-$router->get('mural/fetch', ['uses' => 'MuralController@fetch', 'as' => 'mural.fetch']);
+$router->resource('mural', 'MuralController', ['only' => ['index', 'store', 'destroy']]);

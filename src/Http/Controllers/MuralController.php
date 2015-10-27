@@ -19,12 +19,13 @@ class MuralController extends Controller
     {
     }
 
-    public function fetch(Request $request)
+    public function index(Request $request)
     {
-        $comments = Mural::getComments($request->get('commentable_id'), $request->get('room'),
-            ['beforeId' => $request->get('last_id')]);
+        $content = Factory::create($request->get('id'), $request->get('type'));
+        $comments = Mural::getComments($content, $request->get('room'), ['sort' => $request->get('sort')]);
 
         return view('mural::list', compact('comments', 'content'));
+
     }
 
     public function store(Store $request)

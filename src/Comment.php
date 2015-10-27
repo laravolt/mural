@@ -19,7 +19,7 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    public function scopeNewest($query)
+    public function scopeLatest($query)
     {
         return $query->orderBy('id', 'desc');
     }

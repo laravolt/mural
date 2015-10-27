@@ -23,10 +23,12 @@ class Mural
         $content = $this->getContentObject($content);
         $comments = $this->getComments($content, $room);
         $totalComment = $content->comments()->room($room)->count();
+        $id = $content->getKey();
+        $type = get_class($content);
 
         event('mural.render', [$content]);
 
-        return view("mural::index", compact('content', 'comments', 'room', 'totalComment', 'options'))->render();
+        return view("mural::index", compact('content', 'id', 'type', 'comments', 'room', 'totalComment', 'options'))->render();
     }
 
     public function addComment($content, $body, $room)
@@ -50,10 +52,18 @@ class Mural
     {
         $options = collect($options);
         $content = $this->getContentObject($content);
-        $comments = $content->comments()->newest()->room($room);
+        $comments = $content->comments()->room($room);
 
-        if($options->has('beforeId')) {
-            $comments->beforeId($options->get('beforeId'));
+        $sorted = false;
+        if($options->has('sort')) {
+            if ($options->get('sort') == 'liked') {
+                $comments->mostVoted();
+                $sorted = true;
+            }
+        }
+
+        if (!$sorted) {
+            $comments->latest();
         }
 
         return $comments->paginate($this->config['per_page']);
