@@ -1,14 +1,14 @@
 <script type="text/javascript">
     $(function () {
-        var mural = $('.mural-container');
-        var commentContainer = mural.find('.mural-list');
-        var muralForm = mural.find('.mural-form');
+        var murals = $('.mural-container');
 
         @if(auth()->check())
-        mural.on('submit', '.mural-form', function (e) {
+        murals.on('submit', '.mural-form', function (e) {
             e.preventDefault();
+            var mural = $(e.delegateTarget);
             var form = $(e.currentTarget);
             var btn = form.find('button[type=submit]');
+            var commentContainer = mural.find('.mural-list');
 
             if (btn.hasClass('disabled')) {
                 return false;
@@ -23,7 +23,7 @@
                 dataType: 'json',
                 success: function (response) {
                     commentContainer.prepend(response.html);
-                    mural.find('.title').html(response.title);
+                    form.find('.title').html(response.title);
                     form.find("input[type=text], textarea").val('');
                     mural.find('.button-empty').remove();
                 },
@@ -37,8 +37,9 @@
         });
         @endif
 
-        mural.on('click', '.mural-more', function (e) {
+        murals.on('click', '.mural-more', function (e) {
             e.preventDefault();
+            var mural = $(e.delegateTarget);
             var btn = $(e.currentTarget);
 
             if (btn.hasClass('disabled')) {
@@ -74,9 +75,12 @@
             return false;
         });
 
-        mural.find('.dropdown-sort')
+        murals.find('.dropdown-sort')
                 .dropdown({
-                    onChange: function (value) {
+                    onChange: function (value, text, item) {
+                        var mural = $(item).parents('.mural-container');
+                        var commentContainer = mural.find('.mural-list');
+
                         mural.find('.comments').dimmer('show');
                         mural.data('sort', value);
                         mural.data('page', 1);
@@ -104,12 +108,13 @@
 
         @if(auth()->check() && auth()->user()->canModerateComment())
 
-        mural.on('click', '.button-remove', function (e) {
+        murals.on('click', '.button-remove', function (e) {
             $(this).parent('form').trigger('submit');
         });
 
-        mural.on('submit', '.form-remove', function (e) {
+        murals.on('submit', '.form-remove', function (e) {
             e.preventDefault();
+            var mural = $(e.delegateTarget);
             var form = $(this);
             var comment = form.parents('.comment:first');
 
@@ -135,8 +140,5 @@
             });
         });
         @endif
-
-
-
     });
 </script>

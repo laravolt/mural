@@ -1,5 +1,8 @@
 @if(auth()->check())
     <form class="ui reply form mural-form" method="POST" action="{{ route('mural.store') }}">
+
+        <h3 class="ui header title">@lang('mural::mural.title_with_count', ['count' => $totalComment])</h3>
+
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="commentable_id" value="{{ $content->getKey() }}">
         <input type="hidden" name="commentable_type" value="{{ get_class($content) }}">

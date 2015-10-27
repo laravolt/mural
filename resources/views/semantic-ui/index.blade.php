@@ -6,12 +6,9 @@
      data-page="1"
      data-url="{{ route('mural.index') }}"
 >
-    <div id="form_comment">
-        <h3 class="ui header title">@lang('mural::mural.title_with_count', ['count' => $totalComment])</h3>
-        @if(!$options->get('readonly'))
-            @include('mural::form')
-        @endif
-    </div>
+    @if(!$options->get('readonly'))
+        @include('mural::form')
+    @endif
 
     @if(config('mural.vote'))
         @include(('mural::sort'))
