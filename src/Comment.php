@@ -9,6 +9,8 @@ class Comment extends Model
 
     use SoftDeletes;
 
+    protected $with = ['author'];
+
     public function author()
     {
         return $this->belongsTo(config('auth.model'));
