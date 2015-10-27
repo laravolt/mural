@@ -140,3 +140,4 @@ return [
 * Hapus komentar (done)
 * Laporkan sebagai spam
 * Vote (like dislike) komentar (done)
+* Sort comment by latest or liked (done)
