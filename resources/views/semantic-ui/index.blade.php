@@ -1,4 +1,4 @@
-<div class="ui segment mural-container"
+<div class="ui segment mural-container {{ $options->get('class') }}"
      data-id="{{ $content->getKey() }}"
      data-type="{{ get_class($content) }}"
      data-room="{{ $room }}"
