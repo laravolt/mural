@@ -52,7 +52,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Laravolt\Mural\Http\Controllers'], function($router)
+        $router->group(['namespace' => 'Laravolt\Mural\Http\Controllers', 'middleware' => config('mural.middleware')], function($router)
         {
             require __DIR__.'/Http/routes.php';
         });

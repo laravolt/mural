@@ -29,3 +29,11 @@
         <button class="button ui basic fluid disabled button-empty">@lang('mural::mural.empty')</button>
     @endif
 </div>
+
+@if(config('mural.script_stack'))
+    @push(config('mural.script_stack'))
+    @include('mural::script')
+    @endpush
+@else
+    @include('mural::script')
+@endif
