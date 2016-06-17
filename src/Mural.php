@@ -95,7 +95,7 @@ class Mural
                 throw new \InvalidArgumentException('Value set in config mural.default_commentable was not instance of ' . Commentable::class);
             }
 
-            return with(new $class)->findOrFail($content);
+            return with(new $class)->findOrFail($content->id);
         }
 
         return $content;
