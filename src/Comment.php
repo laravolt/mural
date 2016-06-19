@@ -13,7 +13,7 @@ class Comment extends Model
 
     public function author()
     {
-        return $this->belongsTo(config('auth.model'));
+        return $this->belongsTo(config('auth.providers.users.model'));
     }
 
     public function commentable()
