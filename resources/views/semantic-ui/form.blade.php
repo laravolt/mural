@@ -18,6 +18,6 @@
     </form>
 @else
     <div class="ui message warning">
-        @lang('mural::mural.must_login', ['link' => url('/auth/login')])
+        @lang('mural::mural.must_login', ['link' => url('login')])
     </div>
 @endif
