@@ -62,16 +62,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
             '--realpath' => realpath(__DIR__.'/../database/migrations')
         ]);
 
-        for ($i = 1; $i <= 10; ++$i) {
-            DummyPost::create(['content' => $i]);
-        }
 
-        DummyUser::create(['name' => 'Heru']);
+        $post = DummyPost::create(['content' => 'My first post']);
+        $user = DummyUser::create(['name' => 'Heru']);
 
-        $post = DummyPost::find(1);
         for($i = 1; $i <= 2; $i++) {
             Comment::create([
-                'author_id' => DummyUser::where(['name' => 'Heru'])->first()->id,
+                'author_id' => $user->id,
                 'commentable_id' => $post->id,
                 'commentable_type' => DummyPost::class,
                 'body' => 'My Comment ' . $i,
