@@ -176,6 +176,9 @@ return [
 
     // default commentable class (deprecated)
     'default_commentable' => \App\Models\Post::class,
+
+    // default model for user commentator
+    'default_commentator' => config('auth.providers.users.model')
 ];
 ```
 
