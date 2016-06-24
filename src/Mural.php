@@ -73,7 +73,7 @@ class Mural
     public function remove($id)
     {
         $comment = Comment::find($id);
-        $user = auth()->user();
+        $user = Auth::user();;
 
         if($comment && $user->canModerateComment()) {
             $deleted = $comment->delete();

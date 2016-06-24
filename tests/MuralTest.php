@@ -44,4 +44,19 @@ class MuralTest extends TestCase
 
         $this->assertEquals($comments->count(), 2);
     }
+
+    public function test_remove_comment()
+    {
+        \Auth::shouldReceive('user')
+            ->once()
+            ->andReturn(DummyUser::find(1));
+
+        $post = DummyPost::find(1);
+        $comments = \Mural::getComments($post, 'test-room');
+
+        \Mural::remove($comments->get(0)->id);
+
+        $comments = \Mural::getComments($post, 'test-room');
+        $this->assertEquals($comments->count(), 1);
+    }
 }
