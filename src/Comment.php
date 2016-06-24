@@ -10,6 +10,7 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $with = ['author'];
+    protected $fillable = ['author_id', 'commentable_id', 'commentable_type', 'body', 'room'];
 
     public function author()
     {

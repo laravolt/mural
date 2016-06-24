@@ -24,7 +24,8 @@
         "phpunit/phpunit" : "4.*",
         "scrutinizer/ocular": "~1.1",
         "orchestra/testbench": "~3.0",
-        "mockery/mockery": "dev-master@dev"
+        "mockery/mockery": "dev-master@dev",
+        "symfony/dom-crawler": "^3.1"
     },
     "suggest": {
         "laravolt/votee": "Required to enable comment vote"
