@@ -36,7 +36,7 @@ class MuralTest extends \Orchestra\Testbench\TestCase
             'prefix' => '',
         ]);
         $app['config']->set('mural.default_commentable', Laravolt\Mural\Test\DummyPost::class);
-        $app['config']->set('auth.providers.users.model', Laravolt\Mural\Test\DummyUser::class);
+        $app['config']->set('mural.default_commentator', Laravolt\Mural\Test\DummyUser::class);
     }
 
     protected function setUpDatabase()
