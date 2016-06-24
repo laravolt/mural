@@ -1,6 +1,7 @@
 <?php
 namespace Laravolt\Mural;
 
+use Illuminate\Support\Facades\Auth;
 use Laravolt\Mural\Contracts\Commentable;
 
 class Mural
@@ -33,7 +34,7 @@ class Mural
 
     public function addComment($content, $body, $room)
     {
-        $author = auth()->user();
+        $author = Auth::user();
         $content = $this->getContentObject($content);
         $comment = $content->comments()->getRelated();
         $comment->body = $body;
