@@ -13,7 +13,7 @@ class Comment extends Model
 
     public function author()
     {
-        return $this->belongsTo(config('auth.providers.users.model'));
+        return $this->belongsTo(config('mural.default_commentator'));
     }
 
     public function commentable()
