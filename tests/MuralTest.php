@@ -50,6 +50,7 @@ class MuralTest extends TestCase
             ->andReturn(DummyUser::find(1));
 
         $comment = Comment::where(['body' => 'My Comment 1'])->first();
+        $this->assertEquals($comment->body, 'My Comment 1');
 
         \Mural::remove($comment->id);
 
