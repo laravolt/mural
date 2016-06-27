@@ -82,6 +82,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->app['db']->connection()->getSchemaBuilder()->create('dummy_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('is_admin');
             $table->timestamps();
         });
 
@@ -91,7 +92,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
 
         $post = DummyPost::create(['content' => 'My first post']);
-        $user = DummyUser::create(['name' => 'Heru']);
+        $user = DummyUser::create(['name' => 'Heru', 'is_admin' => 0]);
+        $userAdmin = DummyUser::create(['name' => 'Toni', 'is_admin' => 1]);
 
         for($i = 1; $i <= 2; $i++) {
             Comment::create([

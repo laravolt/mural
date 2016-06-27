@@ -12,7 +12,7 @@ class DummyUser extends Authenticatable implements Commentator
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_admin'
     ];
 
     /**
@@ -41,6 +41,6 @@ class DummyUser extends Authenticatable implements Commentator
 
     public function canModerateComment()
     {
-        return true;
+        return $this->is_admin == 1 ? true : false;
     }
 }
