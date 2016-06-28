@@ -39,8 +39,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->app->bind('mural',function($app){
-            return new Mural($app);
+        $this->app->bind('mural',function(){
+            return new Mural();
         });
     }
 

@@ -1,5 +1,8 @@
 # Laravolt Mural
 
+![Travis-CI Build Status](https://api.travis-ci.org/laravolt/mural.svg)
+[![Coverage Status](https://coveralls.io/repos/github/laravolt/mural/badge.svg?branch=master)](https://coveralls.io/github/laravolt/mural?branch=master)
+
 Laravolt Mural bertujuan menyediakan fitur komentar yang siap dipakai dan mudah diintegrasikan ke dalam aplikasi berbasis Laravel.
 
 Package ini masih dalam tahap pengembangan dan belum dianjurkan untuk digunakan dalam produksi.
@@ -21,7 +24,7 @@ Atau menambahkan deklarasi berikut ke file composer.json:
 
     "require": {
         ...
-        "laravolt/mural": "^0.5"
+        "laravolt/mural": "^1.0"
     },
 
 #### Untuk Laravel 5.1
@@ -30,7 +33,7 @@ Tambahkan deklarasi berikut ke file composer.json:
 
     "require": {
         ...
-        "laravolt/mural": "dev-mural-1.x"
+        "laravolt/mural": "^0.5"
     }
 
 ### Service Provider
@@ -56,7 +59,7 @@ Isi `default_commentable` dengan deklarasi class model yang bisa dikomentari
 
 ## Penggunaan
 
-Untuk setiap model yang bisa dikomentari, tambahkan `trait` seperti berikut:
+Untuk setiap model yang bisa dikomentari, tambahkan `trait` dan `interface` seperti berikut:
 
 ```php
 <?php
@@ -65,10 +68,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravolt\Mural\CommentableTrait;
+use Laravolt\Mural\Contracts\Commentable;
 
-class Post extends Model
+class Post extends Model implements Commentable
 {
     use CommentableTrait;
+
+	public function getCommentableTitleAttribute()
+	{
+		// TODO: Implement getCommentableTitleAttribute() method.
+	}
+
+	public function getCommentablePermalinkAttribute()
+	{
+		// TODO: Implement getCommentablePermalinkAttribute() method.
+	}
+
 }
 ```
 
@@ -176,7 +191,16 @@ return [
 
     // default commentable class (deprecated)
     'default_commentable' => \App\Models\Post::class,
+
+    // default model for user commentator
+    'default_commentator' => config('auth.providers.users.model')
 ];
+```
+
+## Testing
+Karena sepertinya akibat package Orchestral/testbench, `phpunit` harus dijalankan dari lokal vendor, tidak bisa dari global `phpunit`
+```
+vendor/phpunit/phpunit/phpunit
 ```
 
 ## Roadmap
@@ -194,3 +218,9 @@ return [
 * Laporkan sebagai spam
 * Vote (like dislike) komentar (done)
 * Sort comment by latest or liked (done)
+
+## Testing
+
+``` bash
+phpunit
+```

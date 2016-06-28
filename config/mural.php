@@ -11,8 +11,8 @@ return [
     // if set true, you must install laravolt/votee package (https://github.com/laravolt/votee)
     'vote'                => false,
 
-    // default model associated with comment, if not supplied in param
-    'default_commentable' => null,
+    // default model for user commentator
+    'default_commentator' => config('auth.providers.users.model'),
 
     // where to put script
     // if null, all script will placed inline with widget

@@ -10,10 +10,11 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $with = ['author'];
+    protected $fillable = ['author_id', 'commentable_id', 'commentable_type', 'body', 'room'];
 
     public function author()
     {
-        return $this->belongsTo(config('auth.providers.users.model'));
+        return $this->belongsTo(config('mural.default_commentator'));
     }
 
     public function commentable()
