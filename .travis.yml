@@ -29,8 +29,8 @@ after_script:
 
 matrix:
   include:
-    - php: 5.6
-      env: setup=lowest
+#    - php: 5.6
+#      env: setup=lowest
     - php: 5.6
       env: setup=stable
     - php: 5.6
