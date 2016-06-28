@@ -1,5 +1,7 @@
 # Laravolt Mural
 
+![Travis-CI Build Status](https://api.travis-ci.org/laravolt/mural.svg)
+
 Laravolt Mural bertujuan menyediakan fitur komentar yang siap dipakai dan mudah diintegrasikan ke dalam aplikasi berbasis Laravel.
 
 Package ini masih dalam tahap pengembangan dan belum dianjurkan untuk digunakan dalam produksi.
