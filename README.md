@@ -21,7 +21,7 @@ Atau menambahkan deklarasi berikut ke file composer.json:
 
     "require": {
         ...
-        "laravolt/mural": "^0.5"
+        "laravolt/mural": "^1.0"
     },
 
 #### Untuk Laravel 5.1
@@ -30,7 +30,7 @@ Tambahkan deklarasi berikut ke file composer.json:
 
     "require": {
         ...
-        "laravolt/mural": "dev-mural-1.x"
+        "laravolt/mural": "^0.5"
     }
 
 ### Service Provider
@@ -56,7 +56,7 @@ Isi `default_commentable` dengan deklarasi class model yang bisa dikomentari
 
 ## Penggunaan
 
-Untuk setiap model yang bisa dikomentari, tambahkan `trait` seperti berikut:
+Untuk setiap model yang bisa dikomentari, tambahkan `trait` dan `interface` seperti berikut:
 
 ```php
 <?php
@@ -65,10 +65,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravolt\Mural\CommentableTrait;
+use Laravolt\Mural\Contracts\Commentable;
 
-class Post extends Model
+class Post extends Model implements Commentable
 {
     use CommentableTrait;
+
+	public function getCommentableTitleAttribute()
+	{
+		// TODO: Implement getCommentableTitleAttribute() method.
+	}
+
+	public function getCommentablePermalinkAttribute()
+	{
+		// TODO: Implement getCommentablePermalinkAttribute() method.
+	}
+
 }
 ```
 
