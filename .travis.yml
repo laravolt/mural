@@ -6,5 +6,11 @@ php:
   - hhvm
   - nightly
 
+matrix:
+  include:
+    - php: 5.6
+      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+
 before_script:
-  - travis_retry composer update
+  - travis_retry composer self-update
+  - travis_retry composer update --prefer-source $PREFER_LOWEST
