@@ -47,7 +47,7 @@ class MuralTest extends TestCase
     {
         \Auth::shouldReceive('user')
             ->once()
-            ->andReturn(DummyUser::find(1));
+            ->andReturn(DummyUser::where(['is_admin' => 1])->first());
 
         $comment = Comment::where(['body' => 'My Comment 1'])->first();
         $this->assertEquals($comment->body, 'My Comment 1');
@@ -56,5 +56,21 @@ class MuralTest extends TestCase
 
         $comment = Comment::where(['body' => 'My Comment 1'])->first();
         $this->assertEquals($comment, null);
+    }
+
+    public function test_non_admin_cannot_remove_comment()
+    {
+        \Auth::shouldReceive('user')
+            ->once()
+            ->andReturn(DummyUser::where(['is_admin' => 0])->first());
+
+        $comment = Comment::where(['body' => 'My Comment 1'])->first();
+        $this->assertEquals($comment->body, 'My Comment 1');
+
+        $result = \Mural::remove($comment->id);
+
+        $comment = Comment::where(['body' => 'My Comment 1'])->first();
+        $this->assertEquals($comment->body, 'My Comment 1');
+        $this->assertEquals($result, false);
     }
 }
