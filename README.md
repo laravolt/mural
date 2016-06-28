@@ -1,6 +1,7 @@
 # Laravolt Mural
 
 ![Travis-CI Build Status](https://api.travis-ci.org/laravolt/mural.svg)
+[![Coverage Status](https://coveralls.io/repos/github/laravolt/mural/badge.svg?branch=master)](https://coveralls.io/github/laravolt/mural?branch=master)
 
 Laravolt Mural bertujuan menyediakan fitur komentar yang siap dipakai dan mudah diintegrasikan ke dalam aplikasi berbasis Laravel.
 
