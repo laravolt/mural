@@ -182,6 +182,12 @@ return [
 ];
 ```
 
+## Testing
+Karena sepertinya akibat package Orchestral/testbench, `phpunit` harus dijalankan dari lokal vendor, tidak bisa dari global `phpunit`
+```
+vendor/phpunit/phpunit/phpunit
+```
+
 ## Roadmap
 * Basic comment stream (done)
 * Multi room (done)

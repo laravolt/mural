@@ -19,8 +19,6 @@ class MuralTest extends TestCase
         \Mural::addComment($post, 'My new comment', 'test-room');
 
         $this->seeInDatabase('comments', ['body' => 'My new comment', 'room' => 'test-room']);
-
-        $comments = \Mural::getComments($post, 'test-room');
     }
 
     public function test_if_render_is_showing()
@@ -51,12 +49,12 @@ class MuralTest extends TestCase
             ->once()
             ->andReturn(DummyUser::find(1));
 
-        $post = DummyPost::find(1);
-        $comments = \Mural::getComments($post, 'test-room');
+        $comment = Comment::where(['body' => 'My Comment 1'])->first();
+        $this->assertEquals($comment->body, 'My Comment 1');
 
-        \Mural::remove($comments->get(0)->id);
+        \Mural::remove($comment->id);
 
-        $comments = \Mural::getComments($post, 'test-room');
-        $this->assertEquals($comments->count(), 1);
+        $comment = Comment::where(['body' => 'My Comment 1'])->first();
+        $this->assertEquals($comment, null);
     }
 }
