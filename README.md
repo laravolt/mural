@@ -194,6 +194,8 @@ return [
 
     // default model for user commentator
     'default_commentator' => config('auth.providers.users.model')
+
+    'middleware'   => ['web']
 ];
 ```
 
