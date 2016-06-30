@@ -19,10 +19,10 @@
                 </div>  
                 <div class="col-md-9 col-xs-2">
                     @if(auth()->check() && auth()->user()->canModerateComment())
-                        <form class="form-remove" action="{{ route('mural.destroy', $comment->id) }}" method="POST">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
-                        <a class="btn button-remove pull-right"><i class="glyphicon glyphicon-trash"></i> @lang('mural::mural.remove')</a>
+                        <form class="form-remove" action="{{ route('mural.destroy', $comment->id) }}" method="POST" style="display: none;">
+                            {{ method_field('delete') }}
+                            {{ csrf_field() }}
+                            <a class="btn button-remove pull-right"><i class="glyphicon glyphicon-trash"></i> @lang('mural::mural.remove')</a>
                         </form>
                     @endif
                 </div>
