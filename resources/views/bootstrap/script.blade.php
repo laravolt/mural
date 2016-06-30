@@ -46,7 +46,9 @@
                 return false;
             }
 
-            $('.mural-more').prepend('<i class="fa fa-spinner fa-spin"></i>');
+            btn.prepend(loader);
+            btn.addClass('disabled');
+
             var commentContainer = $(e.delegateTarget).find('.mural-list');
 
             mural.data('page', parseInt(mural.data('page')) + 1);
