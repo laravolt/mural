@@ -13,7 +13,6 @@
             if (btn.hasClass('disabled')) {
                 return false;
             }
-
             btn.prepend(loader);
             btn.addClass('disabled');
             $.ajax({
