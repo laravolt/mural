@@ -1,9 +1,7 @@
 <script type="text/javascript">
     $(function () {
         var murals = $('.mural-container');
-        var loader = $('#loader');
-        loader.hide();
-
+        var loader = '<i class="fa fa-spinner fa-spin"></i>';
         @if(auth()->check())
         murals.on('submit', '.mural-form', function (e) {
             e.preventDefault();
@@ -16,8 +14,8 @@
                 return false;
             }
 
-            loader.show();
-
+            btn.prepend(loader);
+            btn.addClass('disabled');
             $.ajax({
                 type: "POST",
                 url: form.attr('action'),
@@ -33,7 +31,8 @@
                     alert(response.responseText);
                 },
                 complete: function () {
-                    loader.hide();
+                    $('.mural-submit > i').remove();
+                    btn.removeClass('disabled');
                 }
             });
         });

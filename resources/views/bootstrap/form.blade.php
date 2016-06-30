@@ -14,8 +14,7 @@
         <div class="form-group">
             <textarea name="body" placeholder="@lang('mural::mural.write_a_comment')" rows="5" class="form-control"></textarea>
         </div>
-        <button type="submit" class="btn btn-default btn-block">
-            <i class="fa fa-spinner fa-spin" id="loader"></i>
+        <button type="submit" class="btn btn-default btn-block mural-submit">
             @lang('mural::mural.submit')
         </button>
     </form>
