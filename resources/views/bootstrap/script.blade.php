@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(function () {
         var murals = $('.mural-container');
-        var loader = $('.fa-spin');
+        var loader = $('#loader');
         loader.hide();
 
         @if(auth()->check())
@@ -38,7 +38,6 @@
             });
         });
         @endif
-
         murals.on('click', '.mural-more', function (e) {
             e.preventDefault();
             var mural = $(e.delegateTarget);
@@ -48,7 +47,7 @@
                 return false;
             }
 
-            btn.addClass('loading disabled');
+            $('.mural-more').prepend('<i class="fa fa-spinner fa-spin"></i>');
             var commentContainer = $(e.delegateTarget).find('.mural-list');
 
             mural.data('page', parseInt(mural.data('page')) + 1);
@@ -71,7 +70,7 @@
                     alert('Something goes wrong');
                 },
                 complete: function () {
-                    btn.removeClass('loading');
+                    $('.mural-more > i').remove();
                 }
             });
             return false;
@@ -120,8 +119,6 @@
             var form = $(this);
             var comment = form.parents('.comment:first');
 
-            comment.dimmer('show');
-
             $.ajax({
                 type: "POST",
                 dataType: 'json',
@@ -129,7 +126,7 @@
                 data: form.serialize(),
                 success: function (response) {
                     if (response.status == 1) {
-                        $('#mural-comment-' + response.id).hide();
+                        $('#mural-comment-' + response.id).fadeOut('1600','linear');
                         mural.find('.title').html(response.title);
                     }
                 },
@@ -137,7 +134,6 @@
                     alert(response.responseText);
                 },
                 complete: function () {
-                    comment.dimmer('hide');
                 }
             });
         });
