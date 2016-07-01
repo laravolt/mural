@@ -10,12 +10,14 @@
             var form = $(e.currentTarget);
             var btn = form.find('button[type=submit]');
             var commentContainer = mural.find('.mural-list');
+            var btn_text = btn.text();
 
             if (btn.hasClass('disabled')) {
                 return false;
             }
-            btn.prepend(loader);
-            btn.addClass('disabled');
+
+            btn.text('').prepend(loader).addClass('disabled');
+
             $.ajax({
                 type: "POST",
                 url: form.attr('action'),
@@ -31,8 +33,7 @@
                     alert(response.responseText);
                 },
                 complete: function () {
-                    $('.mural-submit > i').remove();
-                    btn.removeClass('disabled');
+                    btn.text(btn_text).removeClass('disabled');
                 }
             });
         });
@@ -41,13 +42,13 @@
             e.preventDefault();
             var mural = $(e.delegateTarget);
             var btn = $(e.currentTarget);
-
+            var btn_text = btn.text();
+            
             if (btn.hasClass('disabled')) {
                 return false;
             }
 
-            btn.prepend(loader);
-            btn.addClass('disabled');
+            btn.text('').addClass('disabled').prepend(loader);
 
             var commentContainer = $(e.delegateTarget).find('.mural-list');
 
@@ -71,7 +72,7 @@
                     alert('Something goes wrong');
                 },
                 complete: function () {
-                    $('.mural-more > i').remove();
+                    btn.removeClass('disabled').text(btn_text);
                 }
             });
             return false;
