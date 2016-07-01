@@ -38,12 +38,13 @@
             });
         });
         @endif
+
         murals.on('click', '.mural-more', function (e) {
             e.preventDefault();
             var mural = $(e.delegateTarget);
             var btn = $(e.currentTarget);
             var btn_text = btn.text();
-            
+
             if (btn.hasClass('disabled')) {
                 return false;
             }
@@ -64,6 +65,7 @@
                     if (html.length > 0) {
                         commentContainer.append(html);
                         btn.removeClass('disabled');
+                        btn.text(btn_text)
                     } else {
                         btn.attr("disabled", "disabled").html(btn.data('no-more-content'));
                     }
@@ -72,7 +74,7 @@
                     alert('Something goes wrong');
                 },
                 complete: function () {
-                    btn.removeClass('disabled').text(btn_text);
+                    $('.mural-more i').remove();
                 }
             });
             return false;
