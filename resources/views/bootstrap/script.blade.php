@@ -2,6 +2,7 @@
     $(function () {
         var murals = $('.mural-container');
         var loader = '<i class="fa fa-spinner fa-spin"></i>';
+
         @if(auth()->check())
         murals.on('submit', '.mural-form', function (e) {
             e.preventDefault();
@@ -111,7 +112,7 @@
 
         murals.on({
             mouseover : function() {
-                $(this).find('.form-remove').show();
+                $(this).find('.form-remove').css('display', 'inline');
             },
             mouseleave : function() {
                 $(this).find('.form-remove').hide();
