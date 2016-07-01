@@ -1,8 +1,8 @@
 <div class="comment" data-id="{{ $comment['id'] }}" id="mural-comment-{{ $comment['id'] }}" style="margin-bottom: 1%;">
-    <div class="media" style="padding-right: 1em;">
+    <div class="media">
         <div class="media-left">
-            <a href="{{ $comment->author->commentator_permalink }}" class="avatar pull-left">
-                <img src="{{ $comment->author->commentator_avatar }}" title="" class="img-rounded media-object">
+            <a href="{{ $comment->author->commentator_permalink }}">
+                <img src="{{ $comment->author->commentator_avatar }}" title="avatar" class="media-object avatar img-rounded" style="width: 64px;height: 64px;">
             </a>
         </div>
         <div class="media-body">

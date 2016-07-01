@@ -18,12 +18,6 @@
         <div class="col-md-12 mural-list" style="margin: 1em 0">
             @include('mural::list', ['comments' => $comments, 'options' => $options])
         </div>
-        <!-- <div class="col-md-12">
-            <div class="ui mini text loader">
-                <i class="fa fa-spinner fa-spin"></i>
-                @lang('mural::mural.loading')
-            </div>
-        </div> -->
     </div>
 
     @if(!$comments->isEmpty())
@@ -33,7 +27,7 @@
             </div>
         </div>
     @else
-        <a href="#" class="btn btn-default btn-block disabled button-empty" role="button" style="opacity: 0.5; border: 0">@lang('mural::mural.empty')</a>
+        <a href="#" class="btn btn-default btn-block disabled button-empty" role="button" style="background-color: #fff; border: 0">@lang('mural::mural.empty')</a>
     @endif
 
 </div>
