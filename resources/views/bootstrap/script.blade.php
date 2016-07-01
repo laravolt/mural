@@ -108,14 +108,16 @@
                 });
 
         @if(auth()->check() && auth()->user()->canModerateComment())
+
+        murals.on({
+            mouseover : function() {
+                $(this).find('.form-remove').show();
+            },
+            mouseleave : function() {
+                $(this).find('.form-remove').hide();
+            }
+        }, '.comment');
         
-        $('.comment')
-            .mouseover(function() {
-                $(this).find('.form-remove').fadeIn(900);
-            })
-            .mouseleave(function() {
-                $(this).find('.form-remove').fadeOut(900);
-            });
 
         murals.on('click', '.button-remove', function (e) {
             $(this).parent('form').trigger('submit');

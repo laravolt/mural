@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-md-11">
-            <div class="row">
+            <div class="row" style="min-height: 2.5em;">
                 <div class="col-md-1 col-xs-1" style="padding-right: 1%;">
                     <a href="{{ $comment->author->commentator_permalink }}" class="author"><b>{{ $comment->author->commentator_name }}</b>
                     </a>
