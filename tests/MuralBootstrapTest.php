@@ -11,14 +11,8 @@ class MuralBootstrapTest extends TestCase
 {
 	protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => __DIR__.'/database.sqlite',
-            'prefix' => '',
-        ]);
-        $app['config']->set('mural.default_commentable', DummyPost::class);
-        $app['config']->set('mural.default_commentator', DummyUser::class);
+        parent::getEnvironmentSetUp($app);
+
         $app['config']->set('mural.skin', 'bootstrap');
     }
 
