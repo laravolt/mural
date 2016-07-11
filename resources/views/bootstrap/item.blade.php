@@ -7,8 +7,7 @@
         </div>
         <div class="media-body">
             <div class="media-heading">
-                <a href="{{ $comment->author->commentator_permalink }}" class="author"><b>{{ $comment->author->commentator_name }}</b>
-                </a>
+                <a href="{{ $comment->author->commentator_permalink }}" class="author"><b>{{ $comment->author->commentator_name }}</b></a>
                 <span>&nbsp;</span>
                 <span class="date">
                     {{ \Carbon\Carbon::createFromTimeStamp(strtotime($comment->created_at))->diffForHumans() }}
