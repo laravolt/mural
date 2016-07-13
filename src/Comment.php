@@ -1,4 +1,5 @@
 <?php
+
 namespace Laravolt\Mural;
 
 use Illuminate\Database\Eloquent\Model;
@@ -6,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-
     use SoftDeletes;
 
     protected $with = ['author'];
@@ -34,7 +34,7 @@ class Comment extends Model
 
     public function scopeRoom($query, $room)
     {
-        if($room) {
+        if ($room) {
             $query->whereRoom($room);
         } else {
             $query->whereNull('room');

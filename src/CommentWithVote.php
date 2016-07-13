@@ -1,4 +1,5 @@
 <?php
+
 namespace Laravolt\Mural;
 
 use Laravolt\Votee\Traits\Voteable;

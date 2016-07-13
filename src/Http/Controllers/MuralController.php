@@ -11,7 +11,6 @@ use Mural;
 
 class MuralController extends Controller
 {
-
     /**
      * ContentController constructor.
      */
@@ -25,7 +24,6 @@ class MuralController extends Controller
         $comments = Mural::getComments($content, $request->get('room'), ['sort' => $request->get('sort')]);
 
         return view('mural::list', compact('comments', 'content'));
-
     }
 
     public function store(Store $request)

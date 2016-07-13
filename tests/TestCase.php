@@ -1,4 +1,5 @@
 <?php
+
 namespace Laravolt\Mural\Test;
 
 use Illuminate\Database\Schema\Blueprint;
@@ -10,14 +11,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
      * setUp() akan dipanggil setiap method test case.
      * Jadi setiap test case akan memiliki fresh data.
      */
-	public function setUp()
+    public function setUp()
     {
         parent::setUp();
         $this->setUpDatabase();
     }
 
     /**
-     * Fungsinya mirip seperti config/app.php bagian registering Service Provider di Laravel apps
+     * Fungsinya mirip seperti config/app.php bagian registering Service Provider di Laravel apps.
      */
     protected function getPackageProviders($app)
     {
@@ -27,7 +28,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Fungsinya mirip seperti config/app.php bagian registering Facade di Laravel apps
+     * Fungsinya mirip seperti config/app.php bagian registering Facade di Laravel apps.
      */
     protected function getPackageAliases($app)
     {
@@ -47,9 +48,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => __DIR__.'/database.sqlite',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
         $app['config']->set('mural.default_commentable', DummyPost::class);
         $app['config']->set('mural.default_commentator', DummyUser::class);
@@ -88,20 +89,20 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         $this->artisan('migrate', [
             '--database' => 'sqlite',
-            '--realpath' => realpath(__DIR__.'/../database/migrations')
+            '--realpath' => realpath(__DIR__.'/../database/migrations'),
         ]);
 
         $post = DummyPost::create(['content' => 'My first post']);
         $user = DummyUser::create(['name' => 'Heru', 'is_admin' => 0]);
         $userAdmin = DummyUser::create(['name' => 'Toni', 'is_admin' => 1]);
 
-        for($i = 1; $i <= 2; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             Comment::create([
-                'author_id' => $user->id,
-                'commentable_id' => $post->id,
+                'author_id'        => $user->id,
+                'commentable_id'   => $post->id,
                 'commentable_type' => DummyPost::class,
-                'body' => 'My Comment ' . $i,
-                'room' => 'test-room'
+                'body'             => 'My Comment '.$i,
+                'room'             => 'test-room',
             ]);
         }
     }

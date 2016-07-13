@@ -14,22 +14,21 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(realpath(__DIR__.'/../resources/views/' . config('mural.skin')), 'mural');
+        $this->loadViewsFrom(realpath(__DIR__.'/../resources/views/'.config('mural.skin')), 'mural');
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'mural');
 
         $this->setupRoutes($this->app->router);
 
         $this->publishes([
-            __DIR__.'/../config/mural.php' => config_path('mural.php'),
+            __DIR__.'/../config/mural.php'                                                => config_path('mural.php'),
             __DIR__.'/../database/migrations/2015_08_17_101000_create_comments_table.php' => database_path('migrations/2015_08_17_101000_create_comments_table.php'),
-            __DIR__.'/../resources/lang/id' => base_path('resources/lang/id'),
+            __DIR__.'/../resources/lang/id'                                               => base_path('resources/lang/id'),
         ]);
 
         $this->mergeConfigFrom(
             __DIR__.'/../config/mural.php', 'mural'
         );
-
     }
 
     /**
@@ -39,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->app->bind('mural',function(){
+        $this->app->bind('mural', function () {
             return new Mural();
         });
     }
@@ -47,15 +46,14 @@ class ServiceProvider extends BaseServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     protected function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Laravolt\Mural\Http\Controllers', 'middleware' => config('mural.middleware')], function($router)
-        {
+        $router->group(['namespace' => 'Laravolt\Mural\Http\Controllers', 'middleware' => config('mural.middleware')], function ($router) {
             require __DIR__.'/Http/routes.php';
         });
     }
-
 }

@@ -18,5 +18,5 @@ return [
     // if null, all script will placed inline with widget
     'script_stack' => false,
 
-    'middleware'   => ['web']
+    'middleware'   => ['web'],
 ];

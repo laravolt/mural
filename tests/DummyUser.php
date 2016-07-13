@@ -1,4 +1,5 @@
 <?php
+
 namespace Laravolt\Mural\Test;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ class DummyUser extends Authenticatable implements Commentator
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin'
+        'name', 'email', 'password', 'is_admin',
     ];
 
     /**
@@ -31,12 +32,10 @@ class DummyUser extends Authenticatable implements Commentator
 
     public function getCommentatorAvatarAttribute()
     {
-        return null;
     }
 
     public function getCommentatorPermalinkAttribute()
     {
-        return null;
     }
 
     public function canModerateComment()

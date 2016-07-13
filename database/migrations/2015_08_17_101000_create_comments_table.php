@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateCommentsTable extends Migration
 {
-
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
