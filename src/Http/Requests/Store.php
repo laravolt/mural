@@ -1,4 +1,5 @@
 <?php
+
 namespace Laravolt\Mural\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,5 +27,4 @@ class Store extends FormRequest
             'body' => 'required',
         ];
     }
-
 }

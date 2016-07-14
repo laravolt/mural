@@ -1,4 +1,5 @@
 <?php
+
 namespace Laravolt\Mural;
 
 use Illuminate\Support\Facades\Auth;
@@ -6,7 +7,6 @@ use Laravolt\Mural\Contracts\Commentable;
 
 class Mural
 {
-
     /**
      * Mural constructor.
      */
@@ -25,7 +25,7 @@ class Mural
 
         event('mural.render', [$content]);
 
-        return view("mural::index", compact('content', 'id', 'type', 'comments', 'room', 'totalComment', 'options'))->render();
+        return view('mural::index', compact('content', 'id', 'type', 'comments', 'room', 'totalComment', 'options'))->render();
     }
 
     public function addComment(Commentable $content, $body, $room)
@@ -36,8 +36,9 @@ class Mural
         $comment->room = $room;
         $comment->author()->associate($author);
 
-        if($content->comments()->save($comment)) {
+        if ($content->comments()->save($comment)) {
             event('mural.comment.add', [$comment, $content, $author, $room]);
+
             return $comment;
         }
 
@@ -50,7 +51,7 @@ class Mural
         $comments = $content->comments()->room($room);
 
         $sorted = false;
-        if($options->has('sort')) {
+        if ($options->has('sort')) {
             if ($options->get('sort') == 'liked') {
                 $comments->mostVoted();
                 $sorted = true;
@@ -67,18 +68,18 @@ class Mural
     public function remove($id)
     {
         $comment = Comment::find($id);
-        $user = Auth::user();;
+        $user = Auth::user();
 
-        if($comment && $user->canModerateComment()) {
+        if ($comment && $user->canModerateComment()) {
             $deleted = $comment->delete();
 
             if ($deleted) {
                 event('mural.comment.remove', [$comment, $user]);
+
                 return $comment;
             }
         }
 
         return false;
     }
-
 }

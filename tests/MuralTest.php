@@ -1,10 +1,8 @@
 <?php
+
 namespace Laravolt\Mural\Test;
 
-use Illuminate\Database\Schema\Blueprint;
 use Laravolt\Mural\Comment;
-use Laravolt\Mural\Test\DummyPost;
-use Laravolt\Mural\Test\DummyUser;
 use Symfony\Component\DomCrawler\Crawler;
 
 class MuralTest extends TestCase
