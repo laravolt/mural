@@ -1,3 +1,5 @@
+> **Archived.** This package is no longer maintained (last release 2016) and does not support current Laravel versions.
+
 # Laravolt Mural
 
 ![Travis-CI Build Status](https://api.travis-ci.org/laravolt/mural.svg)
